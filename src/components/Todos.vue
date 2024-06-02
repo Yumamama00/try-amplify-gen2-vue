@@ -18,6 +18,10 @@ function listTodos() {
   })
 }
 
+function deleteTodo(id: string) {
+  client.models.Todo.delete({ id })
+}
+
 function createTodo() {
   client.models.Todo.create({
     content: window.prompt('Todo content')
@@ -38,7 +42,7 @@ onMounted(() => {
     <h1>My todos</h1>
     <button @click="createTodo">+ new</button>
     <ul>
-      <li v-for="todo in todos" :key="todo.id">
+      <li v-for="todo in todos" :key="todo.id" @click="deleteTodo(todo.id)">
         {{ todo.content }}
       </li>
     </ul>
